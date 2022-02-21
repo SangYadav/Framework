@@ -32,6 +32,8 @@ public class BaseClass {
 		{
 			Reporter.log("Setting up the report and Test is getting ready", true);
 			
+			
+			
 			excel = new ExcelDataProvider();	
 			config = new ConfigDataProvider();
 			ExtentSparkReporter extent = new ExtentSparkReporter( new File( System.getProperty("user.dir")+"/Reports/FreeCRM_"+Helper.getCurrentDateTime() +".html"));
