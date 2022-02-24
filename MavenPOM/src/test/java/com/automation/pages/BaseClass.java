@@ -9,6 +9,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 
 import com.automation.utility.BrowserFactory;
 import com.automation.utility.ConfigDataProvider;
@@ -31,9 +32,6 @@ public class BaseClass {
 		public void setUpSuite()
 		{
 			Reporter.log("Setting up the report and Test is getting ready", true);
-			
-			
-			
 			excel = new ExcelDataProvider();	
 			config = new ConfigDataProvider();
 			ExtentSparkReporter extent = new ExtentSparkReporter( new File( System.getProperty("user.dir")+"/Reports/FreeCRM_"+Helper.getCurrentDateTime() +".html"));
@@ -42,12 +40,14 @@ public class BaseClass {
 			
 			Reporter.log("Setting done - Test can be started", true);
 		}
-			@BeforeClass
-			public void setup()
+		
+		@Parameters ("browser")
+		@BeforeClass
+			public void setup(String brows)
 			{ 
 				Reporter.log("Trying to start the browser and getting application ready", true);
 				
-				driver = BrowserFactory.startApplication(driver, config.getBrowser(),config.getStagingUrl());
+				driver = BrowserFactory.startApplication(driver, brows,config.getStagingUrl());
 				
 				Reporter.log("Browser and application are up and running", true);
 			}
